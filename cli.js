@@ -6,6 +6,18 @@ const rl = readline.createInterface({
 });
 let thermostat = new Thermostat
 
+const changeTemperature = () => {
+  rl.question('Enter Command: ', (input) => {
+    getInput(input)
+    _cliResponse()
+    changeTemperature()
+  });
+}
+changeTemperature();
+
+
+
+
 const _getTemp = () => {
   console.log(`The temperature is now ${thermostat.getTemperature()}`)
 }
@@ -21,7 +33,7 @@ const _cliResponse = () => {
     _getTemp()
   }
 }
-const _getInput = () => {
+const getInput = (input) => {
   if ((input) === 'up') {
     thermostat.up();
   } else if ((input) === 'down') {
@@ -32,20 +44,3 @@ const _getInput = () => {
     thermostat.setPowerSavingMode(false)
   }
 }
-
-const changeTemperature = () => {
-  rl.question('Enter Command: ', (input) => {
-    if ((input) === 'up') {
-      thermostat.up();
-    } else if ((input) === 'down') {
-      thermostat.down();
-    } else if ((input) === 'psm on') {
-      thermostat.setPowerSavingMode(true)
-    } else if ((input) === 'psm off') {
-      thermostat.setPowerSavingMode(false)
-    }
-    _cliResponse()
-    changeTemperature()
-  });
-}
-changeTemperature();
